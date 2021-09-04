@@ -1,6 +1,6 @@
 
 
-#-----------Transform city data into dyadic logit structure----------- 
+#-----------Transform city attributes data into dyadic logit structure----------- 
 
 #NOTE: the example files in this repository are files representing potential receiver cities, with "_i" subscripts for column names. 
 #Sender files have the same content as the receiver files. The only difference is the "_j" subscripts for column names.
