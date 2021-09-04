@@ -2,9 +2,9 @@
 
 #-----------Transform city data into dyadic logit structure----------- 
 
-#NOTE: the example files are files representing potential receiver cities, with "_i" 
-#subscripts for column names. Sender files have the same content as the receiver files. 
-#The only difference is the "_j" subscripts for column names.
+#NOTE: the example files in this repository are files representing potential receiver cities, with "_i" subscripts for column names. 
+#Sender files have the same content as the receiver files. The only difference is the "_j" subscripts for column names.
+#In the paper, we use "_r" for receiver cities and "_s" for sender cities.
 
 
 #------Example: transform 2010 files
@@ -12,12 +12,12 @@ receiver2010 <- read.csv("~/Desktop/2010_all_attr_i.csv")
 sender2010 <- read.csv("~/Desktop/2010_all_attr_j.csv")
 
 #repeat each row by itself 767 times in the receiver file 
-#(e.g. the first 767 rows are the same and are attributes of the first city)
+#(e.g. the first 767 rows are the same and show attributes of the first city)
 receiver_2010 <- receiver2010[rep(seq_len(nrow(receiver2010)), each = 767),]
 head(receiver_2010)
 
 #repeat the 767 rows in the sender file 767 times
-#(e.g. the first 767 rows are the attributes of the 767 cities)
+#(e.g. the first 767 rows show attributes of each of the 767 cities)
 n <- 767
 sender_2010 <- do.call("rbind", replicate(n, sender2010, simplify = FALSE))
 head(sender_2010)
@@ -28,37 +28,32 @@ head(sender_2010)
 receiver_sender_2010 <- cbind(receiver_2010, sender_2010)
 head(receiver_sender_2010)
 
-#choose rows where sender is not the same as the receiver
+#choose rows where sender is not the same as the receiver, so we don't pair a city with itself
 clean_2010 <- subset(receiver_sender_2010, city_ID_i != city_ID_j)
 head(clean_2010)
 nrow(clean_2010)
 
-#re-index the rows and generate the file contaiing datd for dyadic logit regression
+#re-index the rows and generate the file containing dyadic logit data
 row.names(clean_2010) <- 1:nrow(clean_2010)
 
 write.csv(clean_2010, "~/Desktop/clean_2010.csv", 
           row.names = FALSE)
 
-#The same process is repeated for 1990 and 2000 sender and receiver files.
+#The same process is repeated for 1990 and 2000 sender and receiver city attribute files.
 
-#NOTE: the files with dyadic logit data is further processed to add 
-#columns detailing whether the institutions of a pair of cities are the same,
-#whether a turnover (any type) took place, whether a demotion turnover took place,
-#whether a horizontal turnover took place, whether a promotion turnover took place,
-#and whether a mutual exchange took place. All these variables are binary: "1" suggests 
-#the event took place, "0" otherwise. To protect the confidentiality of the ICMA data, 
-#these variables are not provided here. 
+#NOTE: the files with dyadic logit data is further processed to add columns detailing whether the institutions of a pair of cities are the same ("ins_same"),
+#whether a turnover (any type) took place ("turnover"), whether a demotion ("dem"), horizontal ("hor"), promotion ("pro") turnover took place, 
+#and whether a mutual exchange ("mutual") took place. 
+#All these variables are binary: "1" suggests the event took place, "0" otherwise. To protect the confidentiality of the ICMA data, "turnover",
+#"dem", "pro", "hor" are not provided here. "ins_same" can be easily calculated in excel (=IF(cm_i<>cm_j,0,IF(mc_i<>mc_j,0,IF(co_i<>co_j,0,1))).
 
-#To locate a turnover event that took place and code it as 1 in 767*766 rows of 0's, 
-#create a new column that binds the city ID of the receiver and sender city. For example,
-#a row where "1234" is receiver ID and "6789" is the sender ID will have an event ID of 
-#"1234-5678". Then, generate the event IDs in the original turnover dataset where turnovers
-#took place, and use these event IDs to fill in "1" for matching rows in the dyadic logit data,
-#"0" otherwise. Similarly, each type of turnover and whether a turnover is mutual can be 
-#coded in the dyadic logit data.
+#To locate a turnover event that took place and code it as 1 in 767*766 rows of 0's, create a new column that binds the city ID of the receiver and sender city. 
+#For example, a row where "1234" is the receiver ID and "6789" is the sender ID will have an event ID of "1234-5678". Then, generate the event IDs in the same 
+#manner in the original turnover dataset where turnovers took place , and use these event IDs to fill in "1" for matching rows in the dyadic logit data,
+#"0" otherwise. Each type of turnover and whether a turnover is mutual can be coded in the dyadic logit data similarly.
 
 
-#-----------Import and scale prepared data----------- 
+#-----------Import and scale dyadic logit data----------- 
 
 setwd("~/Desktop")
 
