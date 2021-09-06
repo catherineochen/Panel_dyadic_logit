@@ -18,6 +18,9 @@ The files are: "1990_all_attri_i.csv", "2000_all_attri_i.csv", and "2000_all_att
 - dem: vote share for Democratic presidential candiate
 - lat: latitude 
 - longt: longtitude
+- cm: council manager form of government 
+- mc: mayor council form of government
+- co: commissioner form of government
 
 (*All variables indicate city-level data)
 
