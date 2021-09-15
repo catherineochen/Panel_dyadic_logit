@@ -45,9 +45,9 @@ write.csv(clean_2010, "~/Desktop/clean_2010.csv",
 #whether a turnover (any type) took place ("turnover"), whether a demotion ("dem"), horizontal ("hor"), promotion ("pro") turnover took place, 
 #and whether a mutual exchange ("mutual") took place. 
 #All these variables are binary: "1" suggests the event took place, "0" otherwise. To protect the confidentiality of the ICMA data, "turnover",
-#"dem", "pro", "hor" are not provided here. "ins_same" can be easily calculated in excel (=IF(cm_i<>cm_j,0,IF(mc_i<>mc_j,0,IF(co_i<>co_j,0,1))).
+#"dem", "pro", "hor" are not provided here. "ins_same" can be easily calculated in excel (=IF(cm_i<>cm_j,0,IF(mc_i<>mc_j,0,1)).
 
-#To locate a turnover event that took place and code it as 1 in 767*766 rows of 0's, create a new column that binds the city ID of the receiver and sender city. 
+#To locate a turnover event that took place and code it as 1 in 3*767*766 rows of 0's, create a new column that binds the city ID of the receiver and sender city. 
 #For example, a row where "1234" is the receiver ID and "6789" is the sender ID will have an event ID of "1234-5678". Then, generate the event IDs in the same 
 #manner in the original turnover dataset where turnovers took place , and use these event IDs to fill in "1" for matching rows in the dyadic logit data,
 #"0" otherwise. Each type of turnover and whether a turnover is mutual can be coded in the dyadic logit data similarly.
