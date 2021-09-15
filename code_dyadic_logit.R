@@ -49,8 +49,8 @@ write.csv(clean_2010, "~/Desktop/clean_2010.csv",
 
 #To locate a turnover event that took place and code it as 1 in 3*767*766 rows of 0's, create a new column that binds the city ID of the receiver and sender city. 
 #For example, a row where "1234" is the receiver ID and "6789" is the sender ID will have an event ID of "1234-5678". Then, generate the event IDs in the same 
-#manner in the original turnover dataset where turnovers took place , and use these event IDs to fill in "1" for matching rows in the dyadic logit data,
-#"0" otherwise. Each type of turnover and whether a turnover is mutual can be coded in the dyadic logit data similarly.
+#manner in the original turnover dataset where turnover events took place , and use these event IDs to fill in "1" for matching rows in the dyadic logit data,
+#"0" otherwise. Each type of turnover and whether a turnover is mutual can be coded in the dyadic data similarly.
 
 
 #-----------Import and scale dyadic logit data----------- 
