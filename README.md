@@ -1,8 +1,6 @@
 # Panel_dyadic_logit
 
-This is a data and code repository for the article "A Vacancy Chain Model of Local Managers' Career Advancement" (Hongtao Yi & Catherine Chen), to
-be published in the Journal of Public Administration Research and Theory. The article investigates the career trajectories of U.S. city managers from a
-national-level angle and examines city-level attributes that drive city managers' career move choices. 
+This is a data and code repository for the article "A Vacancy Chain Model of Local Managers' Career Advancement" (Hongtao Yi & Catherine Chen), published in the Journal of Public Administration Research and Theory (https://doi.org/10.1093/jopart/muab039). The article investigates the career trajectories of U.S. city managers from a national-level angle and examines city-level attributes that drive city managers' career move choices. 
 
 In this repository, we provide the R code we used to organize city-level attributes into a structure suitable for dyadic logit regression, scale variables, and estimate panel dyadic logit models and rare event logit models. The details can be found in "code_dyadic_logit."
 
